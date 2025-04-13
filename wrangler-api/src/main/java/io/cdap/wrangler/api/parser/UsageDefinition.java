@@ -240,5 +240,10 @@ public final class UsageDefinition implements Serializable {
     public UsageDefinition build() {
       return new UsageDefinition(directive, optionalCnt, tokens);
     }
+
+    public Object withRequiredArg(String string) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'withRequiredArg'");
+    }
   }
 }
