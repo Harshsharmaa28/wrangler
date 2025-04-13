@@ -139,9 +139,9 @@ numberRange
  : Number ':' Number '=' value
  ;
 
-value
- : String | Number | Column | Bool
- ;
+value 
+  : String | Number | Column | Bool | BYTE_SIZE | TIME_DURATION 
+  ;
 
 ecommand
  : '!' Identifier
@@ -247,6 +247,20 @@ BackSlash: '\\';
 Dollar   : '$';
 Tilde    : '~';
 
+
+// ===== Added these fragments =====
+fragment BYTE_UNIT  
+  : ('B'|'KB'|'MB'|'GB') 
+  ;
+fragment TIME_UNIT  
+  : ('ns'|'ms'|'s'|'m'|'h') 
+  ;
+
+// ===== Add these tokens =====
+BYTE_SIZE      
+  : Number BYTE_UNIT ;  
+TIME_DURATION  
+  : Number TIME_UNIT ; 
 
 Bool
  : 'true'
