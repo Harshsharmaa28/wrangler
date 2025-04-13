@@ -68,6 +68,8 @@ public enum TokenType implements Serializable {
    * Represents the enumerated type for the object of {@code Numeric} type.
    * This type is associated with the token that is either a integer or real number.
    */
+  BYTE_SIZE,
+  TIME_DURATION,
   NUMERIC,
 
   /**

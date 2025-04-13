@@ -250,7 +250,7 @@ Tilde    : '~';
 
 // ===== Added these fragments =====
 fragment BYTE_UNIT  
-  : ('B'|'KB'|'MB'|'GB') 
+  : ('B'|'KB'|'MB'|'GB' | 'TB') 
   ;
 fragment TIME_UNIT  
   : ('ns'|'ms'|'s'|'m'|'h') 
