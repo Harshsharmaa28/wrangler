@@ -1,3 +1,42 @@
+# ByteSize & TimeDuration Parsers (New Feature)
+CDAP Wrangler now supports native parsing of Byte Size and Time Duration units via the new BYTE_SIZE and TIME_DURATION token types. This enables easier aggregation and transformation of data involving units like KB, MB, GB, ms, s, min, etc.
+
+✅ Supported Units
+ByteSize:
+
+B, KB, MB, GB, TB
+
+### TimeDuration:
+
+ms (milliseconds), s (seconds), m (minutes), h (hours)
+
+📊 New Directive: aggregate-stats
+Aggregates total or average values for size and duration fields across rows.
+
+🧪 Usage Syntax
+wrangler
+Copy
+Edit
+aggregate-stats :<byteSizeColumn> :<timeDurationColumn> <totalSizeOutputColumn> <totalTimeOutputColumn>
+📝 Example
+wrangler
+Copy
+Edit
+aggregate-stats :data_transfer :response_time total_size_mb total_time_sec
+📥 Input Sample
+data_transfer	response_time
+1MB	1s
+2MB	500ms
+512KB	250ms
+📤 Output
+total_size_mb	total_time_sec
+3.5	1.75
+🛠️ Notes
+Supports mixed-case units like mb, KB, etc.
+
+Converts internally to canonical units (bytes and milliseconds) before aggregation.
+
+Output columns are in MB and seconds by default. Future enhancements may support custom unit outputs and average/percentile calculations.
 # Data Prep
 
 ![cm-available](https://cdap-users.herokuapp.com/assets/cm-available.svg)
