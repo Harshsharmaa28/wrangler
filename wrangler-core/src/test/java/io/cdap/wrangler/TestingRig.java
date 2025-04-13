@@ -159,5 +159,32 @@ public final class TestingRig {
     }
     Assert.assertFalse(status.isSuccess());
   }
+  
+  public static void executeAndAssert(
+    String[] recipe,
+    List<Row> inputRows,
+    String expectedSizeCol,
+    double expectedSizeVal,
+    String expectedTimeCol,
+    double expectedTimeVal,
+    double delta // tolerance for double comparison
+  ) throws RecipeException, DirectiveParseException, DirectiveLoadException {
+    List<Row> results = execute(recipe, inputRows);
+    Assert.assertEquals("Only one row should be returned after aggregation", 1, results.size());
+
+    Row result = results.get(0);
+    Object sizeVal = result.getValue(expectedSizeCol);
+    Object timeVal = result.getValue(expectedTimeCol);
+
+    Assert.assertNotNull("Size value should not be null", sizeVal);
+    Assert.assertNotNull("Time value should not be null", timeVal);
+
+    Assert.assertTrue("Size value should be numeric", sizeVal instanceof Number);
+    Assert.assertTrue("Time value should be numeric", timeVal instanceof Number);
+
+    Assert.assertEquals(expectedSizeVal, ((Number) sizeVal).doubleValue(), delta);
+    Assert.assertEquals(expectedTimeVal, ((Number) timeVal).doubleValue(), delta);
+  }
+
 }
 
